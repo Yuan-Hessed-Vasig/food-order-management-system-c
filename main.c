@@ -1,5 +1,37 @@
 #include <stdio.h>
 
+// NO AI
+
+void view_menu(void)
+{
+	// function for view menu
+}
+
+void manage_menu(void)
+{
+	// function for manage menu
+}
+
+void create_order(void)
+{
+	// function for create order
+}
+
+void update_order_status(void)
+{
+	// function for update order status
+}
+
+void record_payment(void)
+{
+	// function for record payment
+}
+
+void daily_sales_order_report(void)
+{
+	// function for daily sales/order reports
+}
+
 int main()
 {
 	int choice;
