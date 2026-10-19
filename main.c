@@ -1,74 +1,70 @@
 #include <stdio.h>
+#include "food_system.h"
 
-// NO AI
-
-void view_menu(void)
+void show_main_menu(void)
 {
-	// function for view menu
+	printf("\n=====FOOD ORDER MANAGEMENT SYSTEM=====\n");
+	printf("1. View Menu\n");
+	printf("2. Manage Menu\n");
+	printf("3. Create Order\n");
+	printf("4. Update Order Status\n");
+	printf("5. Record Payment\n");
+	printf("6. Daily Order/Sales Report\n");
+	printf("7. Exit\n");
 }
 
-void manage_menu(void)
+int confirm_exit(void)
 {
-	// function for manage menu
+	return ask_yes_no("Confirm exit? (Y/N): ");
 }
 
-void create_order(void)
+int main(void)
 {
-	// function for create order
-}
-
-void update_order_status(void)
-{
-	// function for update order status
-}
-
-void record_payment(void)
-{
-	// function for record payment
-}
-
-void daily_sales_order_report(void)
-{
-	// function for daily sales/order reports
-}
-
-int main()
-{
+	Food foods[MAX_FOODS];
+	int count = load_menu(foods); /* load once at startup */
 	int choice;
+	int running = 1;
+	char buf[64];
 
-	printf("=====FOOD ORDER MANAGEMENT SYSTEM===== \n");
-	printf("1. View Menu \n");
-	printf("2. Manage Menu \n");
-	printf("3. Create Order \n");
-	printf("4. Update Order Status \n");
-	printf("5. Record Payment \n");
-	printf("6. Daily Order/Sales Report \n");
-	printf("7. Exit \n");
-
-	scanf(" %d", &choice);
-
-	switch (choice)
+	while (running)
 	{
-	case 1: // algorithm nang view menu
-		printf("Move to View Menu");
-		break;
-	case 2: // algorithm ng manageme menu
-		printf("Move to Manage Menu");
-		break;
-	case 3: // algorithm nang create order
-		printf("Move to Create Order Section");
-		break;
-	case 4: // algorithm nang update order status
-		printf("Move to Update Order Status");
-		break;
-	case 5: // algorithm nang record payment;
-		printf("Move to Record Payment");
-		break;
-	case 6: // algorithm of daily order/sales report
-		printf("Move to Daily Order/Sales Report");
-	case 7: // exit to main program;
-		return 1;
+		show_main_menu();
+		read_line("Enter choice: ", buf, sizeof buf);
+
+		/* Valid choice (1-7)? No -> show the menu again */
+		if (!parse_int(buf, &choice) || choice < 1 || choice > 7)
+		{
+			printf("Invalid choice, enter 1-7.\n");
+			continue;
+		}
+
+		switch (choice)
+		{
+		case 1:
+			view_menu(foods, count);
+			break;
+		case 2:
+			manage_menu(foods, &count);
+			break;
+		case 3:
+			create_order(foods, count);
+			break;
+		case 4:
+			update_order_status();
+			break;
+		case 5:
+			record_payment();
+			break;
+		case 6:
+			daily_sales_order_report();
+			break;
+		case 7:
+			if (confirm_exit())
+				running = 0;
+			break;
+		}
 	}
 
+	printf("Goodbye!\n");
 	return 0;
 }
