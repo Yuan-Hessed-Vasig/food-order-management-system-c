@@ -4,10 +4,10 @@ A console-based food ordering system written in C. It manages a food menu, takes
 
 **Course:** Computer Programming (Basic C)
 **Group members:** 
-_Yuan Hessed Vasig_
-_Jhermaine Xyrra Manangan_
-_Jireh Paul Jarabe_
-_Ailyn Ebrao_
+- _Yuan Hessed Vasig_
+- _Jhermaine Xyrra Manangan_
+- _Jireh Paul Jarabe_
+- _Ailyn Ebrao_
 
 
 ---
